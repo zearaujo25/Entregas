@@ -1,0 +1,11 @@
+
+
+1Fluxo de projeto
+	
+	O que é um RTOS, descreva uma utilizações.
+		Sistemas de tempo real são sistemas operacionais que a resposta a um dado evento é pre-definida, isto é, o sistema deve reagir dentro de um intervalo de tempo pré determinado a este evento. 
+		Outro fator importante deste tipo de sistema é a previsibilidade, ou seja, podemos antecipar a resposta do sistema independente de falhas , sobre cargas e variações de hardware
+		fonte:https://pt.wikipedia.org/wiki/Sistema_operacional_de_tempo-real
+	O que é desenvolvimento em V (Modelo V)?
+		É um tipo de modelo de desenvolvimento da engenharia de sistemas o qual realiza testes rigorosos a cada etapa de desenvolviimento do projeto, visando a detecçãos de erros o mais rápido possivel.
+		fonte:http://w3.ualg.pt/~pventura/ep/aulas_tp/t1_g5.pdf
