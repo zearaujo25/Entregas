@@ -1,3 +1,0 @@
-A funcao malloc serve para rezervar um bloco de memoria, tendo como paramentro um numero inteiro que representa a quantidade de bytes alocada,
-e o resultado desta funcao e o edereco desse bloco de memoria. 
-A funcao malloc deve ser utilizada em conjunto com a funcao free, que serve para desalocar este espaco de memoria.
