@@ -1,0 +1,1 @@
+Prototipagem em C e uma tecnica de declaracao de funcoes onde essas sao escritas no codigo antes da funcao MAIN, mas apenas seu cabecalho. Esta tecninca exxites para evitar a poluicao do codigo e torna-lo mais organizado 
