@@ -75,4 +75,10 @@
 4- Race Conditions 
 	Race conditions e uma condição onde uma aplicação cuja 2 ou mais threads , ou sinais eletricos no caso do uC, tentam acessar e/ou alterar o mesmo espaço de memoria, ou registrador 
 	Ao configurar os registradores da maneira apresentada, a race conditions e evitada pois cada registrador so possui uma funcao especifica.
-	
+
+5 - Configurando um pino em modo de output
+		Quando a linha I/O aciona a função periférica (PIO_PSR está em zero) o drive da linha de I / O é controlada pelo periférico.
+		Quando o controlador PIO manipula a linha I/O, o pino pode ser configurado, feito a partir da escrita do PIO_OER e PIO_ODR, O PIO_OSR detecta essa escrita, quando um bit é setado para zero 
+		a linha referente é configurada para apenas aceitar valores, e quando é setado a 1, a linha obedece ao comando do controlador PIO.
+		
+		
