@@ -1,0 +1,26 @@
+1-Entrada Digital 
+	Um exemplo de sin al digital a ser usado em eletronica embarcada e no controle de acionamento do motor, onde a haveria uma funcao de liga e desliga neste
+
+2-Resitor pull up e puyll down
+	????????????
+	
+3-Divisor de Clock
+	O registrador pode assumir um valor de 2^32 - 1
+4- Carta de tempo
+	Na primeira carta de tempo, onde o filtro glitch e ativado, sinais com pequenos intervalos de tempo nao sao lidos pelo registador de dados, permitindo a passagem de sinais que possuem um tempo de ativaçao maior
+	Na segunda carta de tempo, o deboucing permite a passagem de sinais curto e filtrando os ruidos  desse sinal.
+
+5- while(1)
+
+6-include
+	A diferença entre as duas formas de include , aspas e colchetes angulares, e a ordem de pesquisa da variavel pelo pre-processador
+	Na forma de aspas a ordem de pesquisa e a seguinte:
+	
+		No mesmo diretório do arquivo que contém a instrução #include.
+		Nos diretórios dos arquivos de inclusão abertos atualmente, na ordem inversa da qual foram abertos. A pesquisa começará no diretório do arquivo de inclusão pai e continuará para cima até os diretórios de qualquer arquivo de inclusão avô.
+		Ao longo do caminho que é especificado por cada opção do compilador /I.
+		Ao longo dos caminhos que são especificados pela variável de ambiente INCLUDE.
+	Na forma de colchetes angulares
+		Ao longo do caminho que é especificado por cada opção do compilador /I.
+		Quando a compilação ocorre na linha de comando, ao longo dos caminhos que são especificados pela variável de ambiente INCLUDE.
+	fonte:https://msdn.microsoft.com/pt-br/library/36k2cdd4(v=vs.120).aspx
