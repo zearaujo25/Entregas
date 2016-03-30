@@ -104,7 +104,7 @@ int main (void)
 	// 1: Sets the data to be driven on the I/O line.
 	
 	_pio_set_output(PIOA,(1 << PIN_LED_BLUE ), 1, 0);
-	_pio_set_input(PIOB,1<<PIN_PUSHBUTTON_2,1);
+	_pio_set_input(PIOB, 1<<PIN_PUSHBUTTON_2,1);
 
 	/**
 	*	Loop infinito
@@ -116,16 +116,16 @@ int main (void)
              * escolhida por você.
              */
 			
-		//if(((PIOB->PIO_PDSR >> PIN_PUSHBUTTON_2) & 1) == 0)
-		//{
-			//_pio_set(PIOA,1<<PIN_LED_BLUE);
-		//	PIOA->PIO_SODR =  (1 << PIN_LED_BLUE );
-		//}
-		//else
+		if(((PIOB->PIO_PDSR >> PIN_PUSHBUTTON_2) & 1) == 1)
 		{
-			//_pio_clear(PIOA,1<<PIN_LED_BLUE);
-			//_pio_set(PIOA,1<<PIN_LED_BLUE);
-			PIOA->PIO_CODR =  (1 << PIN_LED_BLUE );
+			_pio_set(PIOA,1<<PIN_LED_BLUE);
+			//PIOA->PIO_SODR =  (1 << PIN_LED_BLUE );
+		}
+		else
+		{
+			_pio_clear(PIOA,1<<PIN_LED_BLUE);
+			
+			//PIOA->PIO_CODR =  (1 << PIN_LED_BLUE );
 			
 		}	
 		
