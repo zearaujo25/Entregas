@@ -100,14 +100,14 @@ void configure_lcd(uint32_t pot)
 	aat31xx_set_backlight(AAT31XX_AVG_BACKLIGHT_LEVEL);
 
 	ili93xx_set_foreground_color(COLOR_WHITE);
-	ili93xx_draw_filled_rectangle(0, 0, ILI93XX_LCD_WIDTH,
-	ILI93XX_LCD_HEIGHT);
+	ili93xx_draw_filled_rectangle(0, 0, ILI93XX_LCD_WIDTH,ILI93XX_LCD_HEIGHT);
+	
 	/** Turn on LCD */
 	ili93xx_display_on();
 	ili93xx_set_cursor_position(0, 0);
 	ili93xx_set_foreground_color(COLOR_BLACK);
 	ili93xx_draw_circle(120, 160, 40);
-	uint32_t x = 120+ 40*cos(angulo);
+	uint32_t x = 120- 40*cos(angulo);
 	uint32_t y = 160 + 40*sin(-angulo);
 	ili93xx_draw_line(120, 160, x, y);
 	//ili93xx_draw_line(120, 160, 120, 100);
@@ -194,6 +194,7 @@ void ADC_Handler(void)
 		tmp = adc_get_channel_value(ADC, ADC_POT_CHANNEL);
 		configure_lcd(tmp);
 	}
+	//adc_value_old = tmp;
 }
 void TC0_Handler(void)
 {
@@ -205,9 +206,9 @@ void TC0_Handler(void)
 	/* Avoid compiler warning */
 	UNUSED(ul_dummy);
 	
-	if (adc_get_status(ADC) & (1 << ADC_POT_CHANNEL)) {
+	//if (adc_get_status(ADC) & (1 << ADC_POT_CHANNEL)) {
 		adc_start(ADC);
-	}
+	//}
 }
 static void configure_tc(void)
 {
@@ -237,7 +238,7 @@ static void configure_tc(void)
 	* tc_find_mck_divisor()
 	*/
 	tc_init(TC0, 0, TC_CMR_CPCTRG | TC_CMR_TCCLKS_TIMER_CLOCK5);
-		tc_write_rc(TC0, 0, 534);
+		tc_write_rc(TC0, 0, 535);
 
 	/*
 	* Devemos configurar o NVIC para receber interrupções do TC 
@@ -251,45 +252,7 @@ static void configure_tc(void)
 /************************************************************************/
 /* MAIN                                                                 */
 /************************************************************************/
-static void configure_tc(void)
-{
-	/*
-	* Aqui atualizamos o clock da cpu que foi configurado em sysclk init
-	*
-	* O valor atual est'a em : 120_000_000 Hz (120Mhz)
-	*/
-	uint32_t ul_sysclk = TC_CMR_TCCLKS_TIMER_CLOCK5;
-	
-	/*
-	*	Ativa o clock do periférico TC 0
-	* 
-	*/
-	pmc_enable_periph_clk(ID_TC0);
-	
 
-	/*
-	* Configura TC para operar no modo de comparação e trigger RC
-	* devemos nos preocupar com o clock em que o TC irá operar !
-	*
-	* Cada TC possui 3 canais, escolher um para utilizar.
-	*
-
-
-	* Uma opção para achar o valor do divisor é utilizar a funcao
-	* tc_find_mck_divisor()
-	*/
-	tc_init(TC0, 0, TC_CMR_CPCTRG | TC_CMR_TCCLKS_TIMER_CLOCK5);
-		tc_write_rc(TC0, 0, 534);
-
-	/*
-	* Devemos configurar o NVIC para receber interrupções do TC 
-	*/
-	NVIC_EnableIRQ(ID_TC0);
-	
-	tc_enable_interrupt(TC0, 0, TC_IER_CPCS); 
-	
-	tc_start(TC0,0);
-}
 int main(void)
 {
 	sysclk_init();
