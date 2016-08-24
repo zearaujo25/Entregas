@@ -130,9 +130,15 @@ void TC0_Handler(void)
 /************************************************************************/
 static void display_menu(void)
 {
-	puts(" 1 : exibe novamente esse menu \n\r"
-		 " 2 : Ativa o LED  \n\r"
-		 " 3 : Desliga o LED \n\r ");
+	puts(" 1 : Exibe novamente esse menu \n\r"
+		 " 2 : Ativa o LED Blue \n\r"
+		 " 3 : Desliga o LED Blue \n\r"
+		 " 4 : Ativa o LED Green \n\r"
+		 " 5 : Desliga o LED Green \n\r"
+		 " 6 : Ativa o LED  Red\n\r"
+		 " 7 : Desliga o LED Red \n\r"
+		 " 8 : Aumentar freq.  \n\r"
+		 " 9 : Diminuir freq. \n\r ");
 }
 
 /************************************************************************/
@@ -175,7 +181,7 @@ int main(void)
 	PIOC->PIO_OER |=  (1 << PIN_LED_RED );
 	
 	
-				tc_stop(TC0, 0);
+	tc_stop(TC0, 0);
 	PIOA->PIO_SODR = (1 << PIN_LED_BLUE );
 	PIOC->PIO_CODR = (1 << PIN_LED_RED );
 	
@@ -192,12 +198,10 @@ int main(void)
 				puts("Led BLUE ON \n\r");
 				break;
 			case '3' :
-		
 				tc_stop(TC0, 0);
 				PIOA->PIO_SODR = (1 << PIN_LED_BLUE );
 				puts("Led BLUE OFF \n\r");
 			
-	
 				break;
 			case '4':
 				tc_start(TC0,0);
