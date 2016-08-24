@@ -72,7 +72,7 @@ static void configure_tc(void)
 
 	pmc_enable_periph_clk(ID_TC0);
 
-	tc_init(TC0, 0, TC_CMR_CPCTRG | TC_CMR_TCCLKS_TIMER_CLOCK1);
+	tc_init(TC0, 0, TC_CMR_CPCTRG | TC_CMR_TCCLKS_TIMER_CLOCK5);
 	
 
 	tc_write_rc(TC0, 0, 8192);
@@ -102,6 +102,25 @@ void TC0_Handler(void)
 	else
 	{
 		pio_clear(PORT_LED_BLUE, (1 << PIN_LED_BLUE));
+	}
+	
+	if(pio_get_output_data_status(PORT_LED_GREEN , MASK_LED_GREEN) == 0)
+	{
+		pio_set(PORT_LED_GREEN, (1 << PIN_LED_GREEN));
+	}
+	else
+	{
+		pio_clear(PORT_LED_GREEN, (1 << PIN_LED_GREEN));
+	}
+	
+	
+	if(pio_get_output_data_status(PORT_LED_RED , MASK_LED_RED) == 0)
+	{
+		pio_set(PORT_LED_RED, (1 << PIN_LED_RED));
+	}
+	else
+	{
+		pio_clear(PORT_LED_RED, (1 << PIN_LED_RED));
 	}
 	
 }
@@ -136,7 +155,7 @@ int main(void)
 	
 	/* frase de boas vindas */
 	puts(" ---------------------------- \n\r"
-	 	 " Bem vindo terraquio !		\n\r"
+	 	 " Bem vindo Corsi  !		\n\r"
 		 " ---------------------------- \n\r");
 		 
 	/* display main menu */
@@ -167,15 +186,18 @@ int main(void)
 				display_menu();
 				break;
 			case '2':
-				configure_tc();
+				tc_start(TC0,0);
 				PIOA->PIO_CODR = (1 << PIN_LED_BLUE );
 				
 				puts("Led BLUE ON \n\r");
 				break;
 			case '3' :
+		
 				tc_stop(TC0, 0);
 				PIOA->PIO_SODR = (1 << PIN_LED_BLUE );
 				puts("Led BLUE OFF \n\r");
+			
+	
 				break;
 			case '4':
 				tc_start(TC0,0);
@@ -200,7 +222,7 @@ int main(void)
 				puts("Led RED OFF \n\r");
 			break;
 			case '8' :
-				tc_start(TC0,0);
+				
 				tc_write_rc(TC0, 0, tc_read_rc(TC0,0) * 0.5);
 				puts("aumentando \n\r");
 				break;
